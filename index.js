@@ -10,7 +10,7 @@ exports.format = source => new Promise((resolve, reject) => {
     trailingComma: 'none',
     bracketSpacing: true
   })
-  standard.lintText(pretty, { fix: true }, (err, result) => {
+  standard.lintText(pretty, { fix: true, parser: 'babel-eslint' }, (err, result) => {
     if (err) {
       return reject(err)
     }
