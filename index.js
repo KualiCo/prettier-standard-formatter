@@ -1,23 +1,28 @@
 const prettier = require('prettier')
 const standard = require('standard')
 
-exports.format = source => new Promise((resolve, reject) => {
-  const pretty = prettier.format(source, {
-    printWidth: 80,
-    tabWidth: 2,
-    parser: 'babylon',
-    singleQuote: true,
-    trailingComma: 'none',
-    bracketSpacing: true
+exports.format = source =>
+  new Promise((resolve, reject) => {
+    const pretty = prettier.format(source, {
+      printWidth: 80,
+      tabWidth: 2,
+      parser: 'babylon',
+      singleQuote: true,
+      trailingComma: 'none',
+      bracketSpacing: true
+    })
+
+    standard.lintText(
+      pretty,
+      { fix: true, parser: 'babel-eslint' },
+      (err, result) => {
+        if (err) return reject(err)
+        const output = result.results[0].output
+
+        if (typeof output !== 'string') {
+          return reject(new Error('Expected a string back from standard'))
+        }
+        resolve(output)
+      }
+    )
   })
-  standard.lintText(pretty, { fix: true, parser: 'babel-eslint' }, (err, result) => {
-    if (err) {
-      return reject(err)
-    }
-    const output = result.results[0].output
-    if (typeof output !== 'string') {
-      return reject(new Error('Expected a string back from standard'))
-    }
-    resolve(output)
-  })
-})

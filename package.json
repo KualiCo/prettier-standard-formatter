@@ -8,10 +8,10 @@
   "dependencies": {
     "globby": "^6.1.0",
     "meow": "^3.7.0",
-    "prettier": "^0.19.0",
-    "recursive-readdir": "^2.1.0",
+    "prettier": "^0.22.0",
+    "recursive-readdir": "^2.1.1",
     "resolve-cwd": "^1.0.0",
-    "standard": "^8.6.0"
+    "standard": "^9.0.2"
   },
   "repository": "git@github.com:dtinth/prettier-standard-formatter.git",
   "author": "Thai Pangsakulyanont <dtinth@spacet.me>"
